@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SampleDIMVC</string>
+    <string name="starred">Starred</string>
+</resources>

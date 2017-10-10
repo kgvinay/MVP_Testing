@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 
 /**
  * @author David Wu (david10608@gmail.com)
- * Created by pl4gue on 09.10.17.
+ *         Created by pl4gue on 09.10.17.
  */
 
 public class RepoDataAdapter extends RecyclerView.Adapter<RepoDataAdapter.RepoDataHolder> {
@@ -36,10 +36,10 @@ public class RepoDataAdapter extends RecyclerView.Adapter<RepoDataAdapter.RepoDa
 
     @Override
     public void onBindViewHolder(RepoDataHolder holder, int position) {
-        Log.d("logs", "getItemCount: "+mRepoList.size());
+        Log.d("logs", "getItemCount: " + mRepoList.size());
         holder.mRepoCreationDateTextView.setText(mRepoList.get(position).getCreatedAt());
         holder.mRepoTitleView.setText(mRepoList.get(position).getName());
-        holder.mRepoLanguageTextView.setText(mRepoList.get(position).getLanguage());
+        holder.mRepoLanguageTextView.setText(mRepoList.get(position).getLanguage() == null ? "N/A" : mRepoList.get(position).getLanguage());
     }
 
     @Override

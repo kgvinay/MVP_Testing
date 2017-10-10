@@ -2,6 +2,7 @@ package com.fhi.sampledimvc.mvp.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.navigation.Navigator;
@@ -17,6 +18,7 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.userButton)
     AppCompatButton userButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

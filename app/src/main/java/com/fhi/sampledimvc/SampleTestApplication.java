@@ -6,8 +6,6 @@ import com.fhi.sampledimvc.injector.di.components.ApplicationComponent;
 import com.fhi.sampledimvc.injector.di.components.DaggerApplicationComponent;
 import com.fhi.sampledimvc.injector.di.modules.ApplicationModule;
 
-import dagger.internal.DaggerCollections;
-
 /**
  * Created by Vinay on 11/28/2016.
  */

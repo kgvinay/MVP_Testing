@@ -3,6 +3,7 @@ package com.fhi.sampledimvc.mvp.view.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.adapters.StarredDataAdapter;
 import com.fhi.sampledimvc.data.entity.starred.GitHubRepoStarred;
+import com.fhi.sampledimvc.mvp.view.DividerItemDecoration;
 import com.fhi.sampledimvc.mvp.view.StarredView;
 
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class StarredActivity extends BaseActivity implements StarredView {
         mStarredPresenter.initialize();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         starredListRecyclerView.setLayoutManager(mLayoutManager);
+        starredListRecyclerView.addItemDecoration(dividerItemDecoration);
         mAdapter = new StarredDataAdapter(mStarredDataList);
         starredListRecyclerView.setAdapter(mAdapter);
 

@@ -4,12 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.adapters.UserDataAdapter;
 import com.fhi.sampledimvc.data.entity.users.User;
+import com.fhi.sampledimvc.mvp.view.DividerItemDecoration;
 import com.fhi.sampledimvc.mvp.view.UserView;
 
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class UserActivity extends BaseActivity implements UserView {
         mUserPresenter.initialize();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         userListRecyclerView.setLayoutManager(mLayoutManager);
+        userListRecyclerView.addItemDecoration(dividerItemDecoration);
         mAdapter = new UserDataAdapter(mUserDataList);
         userListRecyclerView.setAdapter(mAdapter);
     }

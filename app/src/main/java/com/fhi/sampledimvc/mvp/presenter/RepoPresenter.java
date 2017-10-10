@@ -40,6 +40,7 @@ public class RepoPresenter implements Presenter {
         Log.d(TAG, "onNextRepoList: "+reposList.size());
         mView.hideLoadingScreen();
         mView.updateReposResult(reposList);
+        mView.showTitleByUsername("pl4gue");
     }
 
     public void onError(Throwable throwable) {

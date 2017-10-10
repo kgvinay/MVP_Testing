@@ -5,6 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".mvp.view.activity.ReposActivity">
 
+    <TextView
+        android:id="@+id/reposTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Found 0 repositories"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="#2c3e50"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/reposList"
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package com.fhi.sampledimvc.data.entity.repos;
 
 /**
+ * @author David Wu (david10608@gmail.com)
  * Created by Vinay on 11/28/2016.
  */
 

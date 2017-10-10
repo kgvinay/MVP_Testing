@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * @author David Wu (david10608@gmail.com)
  * Created by pl4gue on 09.10.17.
  */
 

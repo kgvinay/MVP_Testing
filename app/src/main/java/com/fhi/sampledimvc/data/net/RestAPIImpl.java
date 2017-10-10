@@ -13,6 +13,7 @@ import rx.Observable;
 
 /**
  * Created by Vinay on 11/28/2016.
+ * Edited by David Wu (david10608@gmail.com)
  */
 public class RestAPIImpl implements Github {
 

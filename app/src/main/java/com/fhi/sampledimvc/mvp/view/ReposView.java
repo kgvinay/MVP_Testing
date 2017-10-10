@@ -5,6 +5,7 @@ import com.fhi.sampledimvc.data.entity.repos.GitHubUserRepos;
 import java.util.List;
 
 /**
+ * @author David Wu (david10608@gmail.com)
  * Created by pl4gue on 09.10.17.
  */
 

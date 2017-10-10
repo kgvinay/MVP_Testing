@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.adapters.RepoDataAdapter;
@@ -20,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * @author David Wu (david10608@gmail.com)
  * Created by pl4gue on 09.10.17.
  */
 

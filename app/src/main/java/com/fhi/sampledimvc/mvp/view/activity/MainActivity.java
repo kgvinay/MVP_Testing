@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 
 import com.fhi.sampledimvc.R;
+import com.fhi.sampledimvc.navigation.Navigator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +23,11 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.reposButton)
+    public void reposButtonClick() {
+        navigator.navigateToReposPage(this);
     }
 
     @OnClick(R.id.starredButton)

@@ -7,7 +7,7 @@ import com.fhi.sampledimvc.SampleTestApplication;
 import com.fhi.sampledimvc.Util;
 import com.fhi.sampledimvc.data.net.RestAPIImpl;
 import com.fhi.sampledimvc.data.net.RestApi;
-import com.fhi.sampledimvc.data.repository.SampleRepository;
+import com.fhi.sampledimvc.data.repository.Github;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.concurrent.TimeUnit;
@@ -126,7 +126,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    SampleRepository provideDataRepository(RestAPIImpl restDataSource) {
+    Github provideDataRepository(RestAPIImpl restDataSource) {
         return restDataSource;
     }
 

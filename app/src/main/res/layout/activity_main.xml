@@ -24,4 +24,12 @@
         android:layout_marginTop="25dp"
         android:text="Github Users"/>
 
+    <Button
+        android:id="@+id/reposButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Repositories" />
+
 </LinearLayout>

@@ -3,6 +3,8 @@ package com.fhi.sampledimvc.navigation;
 
 import android.content.Context;
 import android.content.Intent;
+
+import com.fhi.sampledimvc.mvp.view.activity.ReposActivity;
 import com.fhi.sampledimvc.mvp.view.activity.StarredActivity;
 import com.fhi.sampledimvc.mvp.view.activity.UserActivity;
 
@@ -25,8 +27,15 @@ public class Navigator {
         }
     }
 
-    public void navigateToUserPage(Context context){
-        if(context != null ){
+    public void navigateToReposPage(Context context) {
+        if (context != null) {
+            Intent newPage = ReposActivity.getCallingIntent(context);
+            context.startActivity(newPage);
+        }
+    }
+
+    public void navigateToUserPage(Context context) {
+        if (context != null) {
             Intent intentToLaunch = UserActivity.getCallingIntent(context);
             context.startActivity(intentToLaunch);
         }

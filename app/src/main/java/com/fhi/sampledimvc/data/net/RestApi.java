@@ -1,5 +1,6 @@
 package com.fhi.sampledimvc.data.net;
 
+import com.fhi.sampledimvc.data.entity.repos.GitHubUserRepos;
 import com.fhi.sampledimvc.data.entity.starred.GitHubRepoStarred;
 import com.fhi.sampledimvc.data.entity.users.User;
 
@@ -19,4 +20,7 @@ public interface RestApi {
 
     @GET("users")
     Observable<List<User>> getGithubUsers();
+
+    @GET("users/{user}/repos")
+    Observable<List<GitHubUserRepos>> getUserRepos(@Path("user") String username);
 }

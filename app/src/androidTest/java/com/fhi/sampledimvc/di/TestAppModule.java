@@ -2,12 +2,11 @@ package com.fhi.sampledimvc.di;
 
 import android.content.Context;
 
-import com.fhi.sampledimvc.SampleTestApplication;
 import com.fhi.sampledimvc.TestApplication;
 import com.fhi.sampledimvc.data.MockAPIClient;
 import com.fhi.sampledimvc.data.net.RestAPIImpl;
 import com.fhi.sampledimvc.data.net.RestApi;
-import com.fhi.sampledimvc.data.repository.SampleRepository;
+import com.fhi.sampledimvc.data.repository.Github;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -63,7 +62,7 @@ public class TestAppModule {
 
     @Provides
     @Singleton
-    SampleRepository provideDataRepository(RestAPIImpl restDataSource) {
+    Github provideDataRepository(RestAPIImpl restDataSource) {
         return restDataSource;
     }
 

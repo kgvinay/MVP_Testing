@@ -25,6 +25,7 @@
         <activity android:name=".mvp.view.activity.BaseActivity" />
         <activity android:name=".mvp.view.activity.StarredActivity" />
         <activity android:name=".mvp.view.activity.UserActivity"/>
+        <activity android:name=".mvp.view.activity.ReposActivity" />
     </application>
 
 </manifest>

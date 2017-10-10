@@ -9,6 +9,7 @@ import com.fhi.sampledimvc.injector.di.components.ApplicationComponent;
 import com.fhi.sampledimvc.injector.di.components.DaggerUseCaseComponent;
 import com.fhi.sampledimvc.injector.di.modules.ActivityModule;
 import com.fhi.sampledimvc.injector.di.modules.UseCaseModule;
+import com.fhi.sampledimvc.mvp.presenter.RepoPresenter;
 import com.fhi.sampledimvc.mvp.presenter.StarredPresenter;
 import com.fhi.sampledimvc.mvp.presenter.UserPresenter;
 import com.fhi.sampledimvc.navigation.Navigator;
@@ -22,6 +23,9 @@ public class BaseActivity extends AppCompatActivity {
 
     @Inject
     StarredPresenter mStarredPresenter;
+
+    @Inject
+    RepoPresenter mRepoPresenter;
 
     @Inject
     UserPresenter mUserPresenter;

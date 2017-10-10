@@ -1,6 +1,6 @@
 package com.fhi.sampledimvc.injector.di.modules;
 
-import com.fhi.sampledimvc.data.repository.SampleRepository;
+import com.fhi.sampledimvc.data.repository.Github;
 import com.fhi.sampledimvc.domain.GetStarredDataUseCase;
 import com.fhi.sampledimvc.domain.GetUserUseCase;
 import com.fhi.sampledimvc.injector.PerActivity;
@@ -22,14 +22,14 @@ public class UseCaseModule {
 
     @Provides
     @PerActivity
-    GetStarredDataUseCase provideChannelListUseCase(SampleRepository fhRepository, @Named("ui_thread") Scheduler uiThread,
+    GetStarredDataUseCase provideChannelListUseCase(Github fhRepository, @Named("ui_thread") Scheduler uiThread,
                                                     @Named("executor_thread") Scheduler executorThread) {
         return new GetStarredDataUseCase(fhRepository, uiThread, executorThread);
     }
 
     @Provides
     @PerActivity
-    GetUserUseCase provideUserCase(SampleRepository fhRepository, @Named("ui_thread") Scheduler uiThread,
+    GetUserUseCase provideUserCase(Github fhRepository, @Named("ui_thread") Scheduler uiThread,
                                    @Named("executor_thread") Scheduler executorThread) {
         return new GetUserUseCase(fhRepository, uiThread, executorThread);
     }

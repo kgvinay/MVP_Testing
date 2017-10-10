@@ -8,7 +8,7 @@ package com.fhi.sampledimvc.injector.di.components;
 import android.content.Context;
 
 import com.fhi.sampledimvc.SampleTestApplication;
-import com.fhi.sampledimvc.data.repository.SampleRepository;
+import com.fhi.sampledimvc.data.repository.Github;
 import com.fhi.sampledimvc.injector.di.modules.ApplicationModule;
 import com.fhi.sampledimvc.mvp.view.activity.BaseActivity;
 
@@ -27,7 +27,7 @@ public interface ApplicationComponent {
 
     Context applicationContext();
 
-    SampleRepository sampleRepository();
+    Github sampleRepository();
 
     @Named("ui_thread")
     Scheduler uiThread();

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     tools:context=".mvp.view.activity.ReposActivity">
 
     <TextView
@@ -16,11 +19,19 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:background="#2c3e50"/>
+        android:background="#2c3e50" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/reposList"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/reposList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
 </LinearLayout>

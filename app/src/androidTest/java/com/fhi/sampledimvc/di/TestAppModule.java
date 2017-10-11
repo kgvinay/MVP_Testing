@@ -1,12 +1,16 @@
 package com.fhi.sampledimvc.di;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 
+import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.TestApplication;
 import com.fhi.sampledimvc.data.MockAPIClient;
 import com.fhi.sampledimvc.data.net.RestAPIImpl;
 import com.fhi.sampledimvc.data.net.RestApi;
 import com.fhi.sampledimvc.data.repository.Github;
+import com.fhi.sampledimvc.mvp.view.Util.DividerItemDecoration;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -22,8 +26,6 @@ import rx.schedulers.Schedulers;
  */
 @Module
 public class TestAppModule {
-
-
 
     private final TestApplication mApplication;
 
@@ -41,6 +43,18 @@ public class TestAppModule {
     @Singleton
     public Context provideAppContext() {
         return mApplication.getApplicationContext();
+    }
+
+    @Provides
+    @Singleton
+    Drawable provideDividerDrawable() {
+        return ContextCompat.getDrawable(mApplication.getApplicationContext(), R.drawable.divider);
+    }
+
+    @Provides
+    @Singleton
+    DividerItemDecoration provideDividerItem(Drawable drawable) {
+        return new DividerItemDecoration(drawable);
     }
 
     @Provides

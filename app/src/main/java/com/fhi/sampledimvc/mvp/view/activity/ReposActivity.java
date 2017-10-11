@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.adapters.RepoDataAdapter;
 import com.fhi.sampledimvc.data.entity.repos.GitHubUserRepos;
+import com.fhi.sampledimvc.data.repository.Github;
 import com.fhi.sampledimvc.mvp.view.ReposView;
 
 import java.util.ArrayList;
@@ -82,8 +82,14 @@ public class ReposActivity extends BaseActivity implements ReposView {
             case R.id.action_refresh:
                 Toast.makeText(this, "Refresh clicked!", Toast.LENGTH_SHORT).show();
                 refresh();
+                return true;
             case R.id.action_settings:
                 Toast.makeText(this, "Settings clicked!", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_next:
+                Toast.makeText(this, "Next clicked!", Toast.LENGTH_SHORT).show();
+                nextPage();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -96,9 +102,16 @@ public class ReposActivity extends BaseActivity implements ReposView {
         });
     }
 
-    private void refresh() {
+    private void nextPage() {
+        Toast.makeText(this, "Next Page invoked!", Toast.LENGTH_SHORT).show();
+        mRepoPresenter.next();
+    }
 
-        Toast.makeText(this, "Refresh invoked!", Toast.LENGTH_SHORT).show();
+    private void refresh() {
+        startProgressDialog("Reloading...");
+        mRepoPresenter.refresh();
+        if(mRepoSwipeRefreshLayout.isRefreshing())
+            mRepoSwipeRefreshLayout.setRefreshing(false);
     }
 
     private void setUpProgressDialog() {
@@ -110,7 +123,8 @@ public class ReposActivity extends BaseActivity implements ReposView {
         mProgressDialog.setMax(100);
     }
 
-    private void startProgressDialog() {
+    private void startProgressDialog(String title) {
+        mProgressDialog.setMessage(title);
         mProgressDialog.show();
         progressBarStatus = 0;
         counter = 0;
@@ -133,7 +147,7 @@ public class ReposActivity extends BaseActivity implements ReposView {
     @Override
     public void displayLoadingScreen() {
         if(mProgressDialog!=null)
-            startProgressDialog();
+            startProgressDialog("Loading . . .");
     }
 
     @Override
@@ -143,8 +157,8 @@ public class ReposActivity extends BaseActivity implements ReposView {
     }
 
     @Override
-    public void showTitleByUsername(String username) {
-        mReposTitleTextView.setText(String.format("Found %s repositories of user '%s'", mAdapter.getItemCount(), username));
+    public void showTitleByUsername(List<GitHubUserRepos> reposList,String username,int currentPage,int totalPages) {
+        mReposTitleTextView.setText(String.format("Found %s / %s repositories of user '%s' (Page %s of %s)",mAdapter.getItemCount(), reposList.size(), username,currentPage,totalPages));
     }
 
     @Override
@@ -158,6 +172,4 @@ public class ReposActivity extends BaseActivity implements ReposView {
     @Override
     public void fetchDataError() {
     }
-
-
-}
+    }

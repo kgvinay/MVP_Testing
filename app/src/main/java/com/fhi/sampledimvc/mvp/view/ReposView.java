@@ -14,7 +14,7 @@ public interface ReposView extends View {
 
     void hideLoadingScreen();
 
-    void showTitleByUsername(String username);
+    void showTitleByUsername(List<GitHubUserRepos> reposList,String username,int currentPage,int totalPages);
 
     void updateReposResult(List<GitHubUserRepos> reposList);
 

@@ -26,6 +26,9 @@ public class RepoPresenter implements Presenter {
 
     private ReposView mView;
     private final GetRepoUseCase mRepoListCase;
+    private List<GitHubUserRepos> currentList;
+    private int maxPerRefresh=5;
+    private int current=0, currentPage = 1, totalPages;
 
     @Inject
     public RepoPresenter(GetRepoUseCase repoUseCase) {
@@ -35,16 +38,42 @@ public class RepoPresenter implements Presenter {
     public void initialize() {
         mView.displayLoadingScreen();
         mRepoListCase.setUsername("pl4gue");
+        next();
+    }
+
+    public void next() {
+        mRepoListCase
+                .execute()
+                .subscribe(this::onNextRepoList, this::onError);
+        raiseCounter();
+    }
+
+    public void refresh() {
         mRepoListCase
                 .execute()
                 .subscribe(this::onNextRepoList, this::onError);
     }
 
     public void onNextRepoList(List<GitHubUserRepos> reposList) {
-        Log.d(TAG, "onNextRepoList: "+reposList.size());
+        totalPages = (reposList.size() % maxPerRefresh)!=0?(reposList.size() / maxPerRefresh)+1: (reposList.size() / maxPerRefresh);
+        currentList = reposList.subList(current,current+maxPerRefresh);
+        Log.d(TAG, "onNextRepoList: "+currentList.size());
         mView.hideLoadingScreen();
-        mView.updateReposResult(reposList);
-        mView.showTitleByUsername("pl4gue");
+        mView.updateReposResult(currentList);
+        mView.showTitleByUsername(reposList,"pl4gue",currentPage,totalPages);
+    }
+
+    private void raiseCounter() {
+        current += maxPerRefresh;
+        currentPage++;
+        if (currentPage > totalPages) {
+            resetCounter();
+        }
+    }
+
+    private void resetCounter() {
+        current = 0;
+        currentPage = 1;
     }
 
     public void onError(Throwable throwable) {

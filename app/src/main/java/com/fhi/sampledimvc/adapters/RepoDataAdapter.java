@@ -44,7 +44,6 @@ public class RepoDataAdapter extends RecyclerView.Adapter<RepoDataAdapter.RepoDa
 
     @Override
     public int getItemCount() {
-
         return mRepoList == null ? 0 : mRepoList.size();
     }
 

@@ -7,6 +7,12 @@
         android:icon="@drawable/refresh"
         android:title="Refresh"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_next"
+        android:icon="@drawable/next"
+        android:title="Next page"
+        app:showAsAction="ifRoom"
+        />
 
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_settings"

@@ -5,9 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.adapters.RepoDataAdapter;
@@ -32,6 +38,9 @@ public class ReposActivity extends BaseActivity implements ReposView {
     @BindView(R.id.reposTitleTextView)
     TextView mReposTitleTextView;
 
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout mRepoSwipeRefreshLayout;
+
     ProgressDialog mProgressDialog;
     private int progressBarStatus = 0;
     private Handler progressBarHandler = new Handler();
@@ -49,6 +58,7 @@ public class ReposActivity extends BaseActivity implements ReposView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repos);
         ButterKnife.bind(this);
+        onSwipeRefresh();
         setUpProgressDialog();
         mRepoPresenter.attachView(this);
         mRepoPresenter.initialize();
@@ -59,6 +69,38 @@ public class ReposActivity extends BaseActivity implements ReposView {
         reposListRecyclerView.setAdapter(mAdapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.repos_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                Toast.makeText(this, "Refresh clicked!", Toast.LENGTH_SHORT).show();
+                refresh();
+            case R.id.action_settings:
+                Toast.makeText(this, "Settings clicked!", Toast.LENGTH_SHORT).show();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void onSwipeRefresh() {
+        mRepoSwipeRefreshLayout.setOnRefreshListener(() -> {
+            Toast.makeText(this, "Refresh swiped!", Toast.LENGTH_SHORT).show();
+            refresh();
+        });
+    }
+
+    private void refresh() {
+
+        Toast.makeText(this, "Refresh invoked!", Toast.LENGTH_SHORT).show();
+    }
+
     private void setUpProgressDialog() {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
@@ -66,6 +108,26 @@ public class ReposActivity extends BaseActivity implements ReposView {
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setProgress(0);
         mProgressDialog.setMax(100);
+    }
+
+    private void startProgressDialog() {
+        mProgressDialog.show();
+        progressBarStatus = 0;
+        counter = 0;
+        new Thread(() -> {
+            while (progressBarStatus < 100) {
+                progressBarStatus = counter;
+                counter += 2;
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                progressBarHandler.post(() -> mProgressDialog.setProgress(progressBarStatus));
+            }
+            if (progressBarStatus >= 100)
+                return;
+        }).start();
     }
 
     @Override
@@ -95,27 +157,7 @@ public class ReposActivity extends BaseActivity implements ReposView {
 
     @Override
     public void fetchDataError() {
-
     }
 
-    public void startProgressDialog() {
-        mProgressDialog.show();
-        progressBarStatus = 0;
-        counter = 0;
-        new Thread(() -> {
-            while (progressBarStatus < 100) {
-                progressBarStatus = counter;
-                counter += 2;
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                progressBarHandler.post(() -> mProgressDialog.setProgress(progressBarStatus));
-            }
-            if (progressBarStatus >= 100)
-                return;
-        }).start();
-    }
 
 }

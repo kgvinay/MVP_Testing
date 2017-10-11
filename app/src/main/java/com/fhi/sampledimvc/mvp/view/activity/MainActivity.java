@@ -2,16 +2,20 @@ package com.fhi.sampledimvc.mvp.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 
 import com.fhi.sampledimvc.R;
-import com.fhi.sampledimvc.navigation.Navigator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by Vinay on 11/28/2016.
+ * Edited by David Wu (david10608@gmail.com)
+ */
+
 public class MainActivity extends BaseActivity {
+
 
     @BindView(R.id.starredButton)
     AppCompatButton starredButton;
@@ -19,6 +23,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.userButton)
     AppCompatButton userButton;
 
+    //TODO(0) Edittext for username
+    //TODO(1) parallel RxJava Data getting by scrolling
+    //TODO(2) change font styles (make "Created on" etc big)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

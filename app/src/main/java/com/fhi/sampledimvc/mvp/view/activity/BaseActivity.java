@@ -11,7 +11,7 @@ import com.fhi.sampledimvc.injector.di.modules.UseCaseModule;
 import com.fhi.sampledimvc.mvp.presenter.RepoPresenter;
 import com.fhi.sampledimvc.mvp.presenter.StarredPresenter;
 import com.fhi.sampledimvc.mvp.presenter.UserPresenter;
-import com.fhi.sampledimvc.mvp.view.DividerItemDecoration;
+import com.fhi.sampledimvc.mvp.view.Util.DividerItemDecoration;
 import com.fhi.sampledimvc.navigation.Navigator;
 
 import javax.inject.Inject;

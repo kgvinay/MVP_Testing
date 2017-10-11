@@ -37,9 +37,9 @@ public class RepoDataAdapter extends RecyclerView.Adapter<RepoDataAdapter.RepoDa
     @Override
     public void onBindViewHolder(RepoDataHolder holder, int position) {
         Log.d("logs", "getItemCount: " + mRepoList.size());
-        holder.mRepoCreationDateTextView.setText(mRepoList.get(position).getCreatedAt());
         holder.mRepoTitleView.setText(mRepoList.get(position).getName());
-        holder.mRepoLanguageTextView.setText(mRepoList.get(position).getLanguage() == null ? "N/A" : mRepoList.get(position).getLanguage());
+        holder.mRepoLanguageTextView.setText(String.format("Language: %s", String.valueOf(mRepoList.get(position).getLanguage() == null ? "N/A" : mRepoList.get(position).getLanguage())));
+        holder.mRepoCreationDateTextView.setText(String.format("Created on: %s at %s", mRepoList.get(position).getCreatedAt().split("T")[0], mRepoList.get(position).getCreatedAt().split("T")[1].substring(0, mRepoList.get(position).getCreatedAt().split("T")[1].length() - 1)));
     }
 
     @Override

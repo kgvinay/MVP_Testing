@@ -1,7 +1,9 @@
 package com.fhi.sampledimvc.mvp.presenter;
 
 import android.util.Log;
+import android.widget.EditText;
 
+import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.data.entity.repos.GitHubUserRepos;
 import com.fhi.sampledimvc.domain.GetRepoUseCase;
 import com.fhi.sampledimvc.mvp.view.ReposView;
@@ -10,6 +12,8 @@ import com.fhi.sampledimvc.mvp.view.View;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
 
 import static android.content.ContentValues.TAG;
 

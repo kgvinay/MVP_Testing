@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.SampleTestApplication;
@@ -12,8 +11,7 @@ import com.fhi.sampledimvc.Util;
 import com.fhi.sampledimvc.data.net.RestAPIImpl;
 import com.fhi.sampledimvc.data.net.RestApi;
 import com.fhi.sampledimvc.data.repository.Github;
-import com.fhi.sampledimvc.mvp.view.DividerItemDecoration;
-import com.fhi.sampledimvc.mvp.view.activity.ReposActivity;
+import com.fhi.sampledimvc.mvp.view.Util.DividerItemDecoration;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.concurrent.TimeUnit;

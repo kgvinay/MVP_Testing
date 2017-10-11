@@ -6,12 +6,11 @@ package com.fhi.sampledimvc.injector.di.components;
 
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 
 import com.fhi.sampledimvc.SampleTestApplication;
 import com.fhi.sampledimvc.data.repository.Github;
 import com.fhi.sampledimvc.injector.di.modules.ApplicationModule;
-import com.fhi.sampledimvc.mvp.view.DividerItemDecoration;
+import com.fhi.sampledimvc.mvp.view.Util.DividerItemDecoration;
 import com.fhi.sampledimvc.mvp.view.activity.BaseActivity;
 
 import javax.inject.Named;

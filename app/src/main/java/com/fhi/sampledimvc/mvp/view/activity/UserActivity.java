@@ -4,14 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.adapters.UserDataAdapter;
 import com.fhi.sampledimvc.data.entity.users.User;
-import com.fhi.sampledimvc.mvp.view.DividerItemDecoration;
 import com.fhi.sampledimvc.mvp.view.UserView;
 
 import java.util.ArrayList;
@@ -26,6 +25,9 @@ public class UserActivity extends BaseActivity implements UserView {
     RecyclerView userListRecyclerView;
 
     ProgressDialog mProgressDialog;
+    private int progressBarStatus = 0;
+    private Handler progressBarHandler = new Handler();
+    private int counter = 0;;
 
     UserDataAdapter mAdapter;
     private List<User> mUserDataList = new ArrayList<>();
@@ -39,7 +41,7 @@ public class UserActivity extends BaseActivity implements UserView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
-        setupProgressDialog();
+        setUpProgressDialog();
         mUserPresenter.attachView(this);
         mUserPresenter.initialize();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -49,17 +51,19 @@ public class UserActivity extends BaseActivity implements UserView {
         userListRecyclerView.setAdapter(mAdapter);
     }
 
-    private void setupProgressDialog() {
+    private void setUpProgressDialog() {
         mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setMessage("Loading . . . ");
-        mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Loading . . .");
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setProgress(0);
+        mProgressDialog.setMax(100);
     }
 
     @Override
     public void displayLoadingScreen() {
-         if(mProgressDialog != null )
-             mProgressDialog.show();
+        if(mProgressDialog!=null)
+            startProgressDialog();
     }
 
     @Override
@@ -79,4 +83,25 @@ public class UserActivity extends BaseActivity implements UserView {
     public void fetchDataError() {
 
     }
+
+    public void startProgressDialog() {
+        mProgressDialog.show();
+        progressBarStatus = 0;
+        counter = 0;
+        new Thread(() -> {
+            while (progressBarStatus < 100) {
+                progressBarStatus = counter;
+                counter += 2;
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                progressBarHandler.post(() -> mProgressDialog.setProgress(progressBarStatus));
+            }
+            if (progressBarStatus >= 100)
+                return;
+        }).start();
+    }
+
 }

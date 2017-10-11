@@ -1,4 +1,4 @@
-package com.fhi.sampledimvc.mvp.view;
+package com.fhi.sampledimvc.mvp.view.Util;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;

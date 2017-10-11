@@ -11,7 +11,10 @@
             android:id="@+id/repoTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name" />
+            android:text="Name"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/repoLanguageTextView"

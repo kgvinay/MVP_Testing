@@ -4,7 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.adapters.RepoDataAdapter;
 import com.fhi.sampledimvc.data.entity.repos.GitHubUserRepos;
-import com.fhi.sampledimvc.mvp.view.DividerItemDecoration;
 import com.fhi.sampledimvc.mvp.view.ReposView;
 
 import java.util.ArrayList;
@@ -34,6 +33,9 @@ public class ReposActivity extends BaseActivity implements ReposView {
     TextView mReposTitleTextView;
 
     ProgressDialog mProgressDialog;
+    private int progressBarStatus = 0;
+    private Handler progressBarHandler = new Handler();
+    private int counter = 0;
 
     RepoDataAdapter mAdapter;
     private List<GitHubUserRepos> mRepoList = new ArrayList<>();
@@ -59,16 +61,17 @@ public class ReposActivity extends BaseActivity implements ReposView {
 
     private void setUpProgressDialog() {
         mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setMessage("Loading . . . ");
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Loading . . .");
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setProgress(0);
+        mProgressDialog.setMax(100);
     }
 
     @Override
     public void displayLoadingScreen() {
         if(mProgressDialog!=null)
-            mProgressDialog.show();
+            startProgressDialog();
     }
 
     @Override
@@ -79,7 +82,7 @@ public class ReposActivity extends BaseActivity implements ReposView {
 
     @Override
     public void showTitleByUsername(String username) {
-        mReposTitleTextView.setText("Found "+mAdapter.getItemCount()+" repositories of user "+username);
+        mReposTitleTextView.setText(String.format("Found %s repositories of user '%s'", mAdapter.getItemCount(), username));
     }
 
     @Override
@@ -94,4 +97,25 @@ public class ReposActivity extends BaseActivity implements ReposView {
     public void fetchDataError() {
 
     }
+
+    public void startProgressDialog() {
+        mProgressDialog.show();
+        progressBarStatus = 0;
+        counter = 0;
+        new Thread(() -> {
+            while (progressBarStatus < 100) {
+                progressBarStatus = counter;
+                counter += 2;
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                progressBarHandler.post(() -> mProgressDialog.setProgress(progressBarStatus));
+            }
+            if (progressBarStatus >= 100)
+                return;
+        }).start();
+    }
+
 }

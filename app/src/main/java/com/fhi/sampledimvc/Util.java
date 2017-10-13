@@ -13,6 +13,13 @@ import java.util.List;
  * Created by Vinay on 10/1/2016.
  */
 public class Util {
+    public static class UtilConstants {
+        public static class Languages {
+            public final static String DE = "de";
+            public final static String IN = "in";
+            public final static String EN = "en";
+        }
+    }
 
     public static boolean isInternetConnection(Context context) {
         boolean isConnected;

@@ -24,6 +24,7 @@
     <string name="loading">Loading . . .</string>
     <string name="repo_titleAfterFound">Found %1$d / %2$d repositories of user \'%3$s\' (Page %4$d of %5$d)</string>
     <string name="reload">Reloading . . .</string>
+    <string name="languagePreferenceKey">LANG</string>
     <string-array name="lang_select">
         <item>English</item>
         <item>German</item>

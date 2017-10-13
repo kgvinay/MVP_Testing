@@ -24,6 +24,8 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import static com.fhi.sampledimvc.R.string.languagePreferenceKey;
+
 public class BaseActivity extends AppCompatActivity {
 
     Locale locale;
@@ -51,21 +53,25 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLanguage();
+        DaggerUseCaseComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .useCaseModule(new UseCaseModule())
+                .build().inject(this);
+    }
+
+    private void loadLanguage() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Configuration config = getBaseContext().getResources().getConfiguration();
 
-        String lang = preferences.getString("LANG", "");
+        String lang = preferences.getString(getString(languagePreferenceKey), "");
         if (!lang.equals("") && !config.locale.equals(lang)) {
             locale = new Locale(lang);
             Locale.setDefault(locale);
             config.locale = locale;
             getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         }
-        DaggerUseCaseComponent.builder()
-                .applicationComponent(getApplicationComponent())
-                .activityModule(getActivityModule())
-                .useCaseModule(new UseCaseModule())
-                .build().inject(this);
     }
 
     private ApplicationComponent getApplicationComponent() {
@@ -113,4 +119,5 @@ public class BaseActivity extends AppCompatActivity {
         if (mProgressDialog != null)
             mProgressDialog.dismiss();
     }
+
 }

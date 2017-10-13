@@ -12,11 +12,15 @@ import android.view.View;
 import android.widget.Spinner;
 
 import com.fhi.sampledimvc.R;
+import com.fhi.sampledimvc.Util;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.fhi.sampledimvc.R.string.languagePreferenceKey;
 
 /**
  * Created by Vinay on 11/28/2016.
@@ -70,16 +74,16 @@ public class MainActivity extends BaseActivity {
             int langpos = mLanguageSpinner.getSelectedItemPosition();
             switch(langpos) {
                 case 0: //English
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "en").apply();
-                    setLangRecreate("en");
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString(getString(languagePreferenceKey), Util.UtilConstants.Languages.EN).apply();
+                    setLangRecreate(Util.UtilConstants.Languages.EN);
                     return;
                 case 1: //German
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "de").apply();
-                    setLangRecreate("de");
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString(getString(languagePreferenceKey), Util.UtilConstants.Languages.DE).apply();
+                    setLangRecreate(Util.UtilConstants.Languages.DE);
                     return;
                 default: //By default set to english
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "de").apply();
-                    setLangRecreate("de");
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString(getString(languagePreferenceKey), Util.UtilConstants.Languages.EN).apply();
+                    setLangRecreate(Util.UtilConstants.Languages.EN);
                     return;
             }
         });

@@ -56,7 +56,11 @@ public class RepoPresenter implements Presenter {
 
     public void onNextRepoList(List<GitHubUserRepos> reposList) {
         totalPages = (reposList.size() % maxPerRefresh)!=0?(reposList.size() / maxPerRefresh)+1: (reposList.size() / maxPerRefresh);
-        currentList = reposList.subList(current,current+maxPerRefresh);
+        try {
+            currentList = reposList.subList(current, current + maxPerRefresh);
+        } catch (IndexOutOfBoundsException iobe) {
+            currentList = reposList.subList(current, reposList.size());
+        }
         Log.d(TAG, "onNextRepoList: "+currentList.size());
         mView.hideLoadingScreen();
         mView.updateReposResult(currentList);
@@ -68,6 +72,7 @@ public class RepoPresenter implements Presenter {
         currentPage++;
         if (currentPage > totalPages) {
             resetCounter();
+            refresh();
         }
     }
 

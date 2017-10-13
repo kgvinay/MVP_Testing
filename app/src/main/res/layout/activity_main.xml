@@ -15,7 +15,7 @@
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Github username: "
+        android:hint="@string/main_EditTextGithubUsername"
         android:selectAllOnFocus="true"
         android:singleLine="true" />
 
@@ -24,14 +24,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="@string/starred"/>
+        android:text="@string/main_buttonStarred"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/userButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Github Users"/>
+        android:text="@string/main_buttonGithubUsers"/>
 
     <Button
         android:id="@+id/reposButton"
@@ -39,13 +39,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Repositories" />
+        android:text="@string/main_buttonRepositories" />
 
     <Button
         android:id="@+id/progressButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Progressbar test"/>
+        android:text="@string/main_buttonProgressbar"/>
 
 </LinearLayout>

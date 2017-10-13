@@ -1,10 +1,24 @@
 package com.fhi.sampledimvc.mvp.view.activity;
 
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Spinner;
 
 import com.fhi.sampledimvc.R;
 
+import java.util.Locale;
+
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -18,14 +32,17 @@ public class MainActivity extends BaseActivity {
 
 
     @BindView(R.id.starredButton)
-    AppCompatButton starredButton;
+    AppCompatButton mStarredButton;
 
     @BindView(R.id.userButton)
-    AppCompatButton userButton;
+    AppCompatButton mUserButton;
+
+    Locale locale;
 
     //TODO(0) Edittext for username
     //TODO(1) parallel RxJava Data getting by scrolling
     //TODO(2) change font styles (make "Created on" etc big)
+    //TODO(3) Localization
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +50,67 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_change_language:
+                showChangeLangDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void showChangeLangDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.language_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+        dialogBuilder.setTitle(getResources().getString(R.string.lang_dialog_title));
+        dialogBuilder.setMessage(getResources().getString(R.string.lang_dialog_message));
+        dialogBuilder.setPositiveButton("Change", (dialog, whichButton) -> {
+            final Spinner mLanguageSpinner = (Spinner) dialogView.findViewById(R.id.languageSpinner);
+            int langpos = mLanguageSpinner.getSelectedItemPosition();
+            switch(langpos) {
+                case 0: //English
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "en").commit();
+                    setLangRecreate("en");
+                    return;
+                case 1: //German
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "de").commit();
+                    setLangRecreate("de");
+                    return;
+                default: //By default set to english
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "en").commit();
+                    setLangRecreate("en");
+                    return;
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", (dialog, whichButton) -> {
+            //pass
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
+    public void setLangRecreate(String langval) {
+        Configuration config = getBaseContext().getResources().getConfiguration();
+        locale = new Locale(langval);
+        Locale.setDefault(locale);
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        recreate();
+    }
+
 
     @OnClick(R.id.reposButton)
     public void reposButtonClick() {

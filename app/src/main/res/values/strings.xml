@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">SampleDIMVC</string>
-    <string name="starred">Starred</string>
+    <string name="main_buttonStarred">Starred</string>
+    <string name="settings_language_English">English</string>
+    <string name="settings_language_Hindi">Hindi</string>
+    <string name="settings_language_German">German</string>
+    <string name="settings_language_French">French</string>
+    <string name="main_menu_Settings">Settings</string>
+    <string name="main_buttonGithubUsers">Github Users</string>
+    <string name="main_buttonRepositories">Repositories</string>
+    <string name="main_buttonProgressbar">Progressbar test</string>
+    <string name="main_EditTextGithubUsername">Github username:</string>
+    <string name="repos_defaultTitleText">Found 0 repositories</string>
+    <string name="item_repo_RepoName">Name</string>
+    <string name="item_repo_ProgrammingLanguage">Programming Language</string>
+    <string name="item_repo_CreationDate">Creation Date</string>
+    <string name="item_user_RepoURL">Repository URL</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_devinfo">About</string>
+    <string name="share_app">Share</string>
+    <string name="language_setting">Change Language</string>
+    <string name="lang_dialog_title">Language Settings</string>
+    <string name="lang_dialog_message">Choose Language:</string>
+    <string-array name="lang_select">
+        <item>English</item>
+        <item>German</item>
+    </string-array>
 </resources>

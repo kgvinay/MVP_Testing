@@ -42,6 +42,7 @@ public class RepoPresenter implements Presenter {
     }
 
     public void next() {
+        mView.displayLoadingScreen();
         mRepoListCase
                 .execute()
                 .subscribe(this::onNextRepoList, this::onError);
@@ -49,6 +50,8 @@ public class RepoPresenter implements Presenter {
     }
 
     public void refresh() {
+        mView.displayLoadingScreen();
+        resetCounter();
         mRepoListCase
                 .execute()
                 .subscribe(this::onNextRepoList, this::onError);

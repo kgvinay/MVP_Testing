@@ -1,11 +1,14 @@
 package com.fhi.sampledimvc.mvp.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.SampleTestApplication;
 import com.fhi.sampledimvc.injector.di.components.ApplicationComponent;
 import com.fhi.sampledimvc.injector.di.components.DaggerUseCaseComponent;
@@ -24,6 +27,11 @@ import javax.inject.Inject;
 public class BaseActivity extends AppCompatActivity {
 
     Locale locale;
+
+    private ProgressDialog mProgressDialog;
+    private int progressBarStatus = 0;
+    private Handler progressBarHandler = new Handler();
+    private int counter = 0;
 
     @Inject
     Navigator navigator;
@@ -46,7 +54,7 @@ public class BaseActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Configuration config = getBaseContext().getResources().getConfiguration();
 
-        String lang = preferences.getString("LANG","");
+        String lang = preferences.getString("LANG", "");
         if (!lang.equals("") && !config.locale.equals(lang)) {
             locale = new Locale(lang);
             Locale.setDefault(locale);
@@ -66,5 +74,43 @@ public class BaseActivity extends AppCompatActivity {
 
     private ActivityModule getActivityModule() {
         return new ActivityModule(this);
+    }
+
+
+    protected void setUpProgressDialog() {
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage(getString(R.string.loading));
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mProgressDialog.setProgress(0);
+        mProgressDialog.setMax(100);
+    }
+
+    protected void startProgressDialog(String title) {
+        if (mProgressDialog != null) {
+            mProgressDialog.setMessage(title);
+            mProgressDialog.show();
+            progressBarStatus = 0;
+            counter = 0;
+            new Thread(() -> {
+                while (progressBarStatus < 100) {
+                    progressBarStatus = counter;
+                    counter += 1;
+                    try {
+                        Thread.sleep(30);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    progressBarHandler.post(() -> mProgressDialog.setProgress(progressBarStatus));
+                }
+                if (progressBarStatus >= 100)
+                    return;
+            }).start();
+        }
+    }
+
+    protected void stopProgressDialog() {
+        if (mProgressDialog != null)
+            mProgressDialog.dismiss();
     }
 }

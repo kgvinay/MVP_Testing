@@ -24,11 +24,6 @@ public class UserActivity extends BaseActivity implements UserView {
     @BindView(R.id.userList)
     RecyclerView userListRecyclerView;
 
-    ProgressDialog mProgressDialog;
-    private int progressBarStatus = 0;
-    private Handler progressBarHandler = new Handler();
-    private int counter = 0;;
-
     UserDataAdapter mAdapter;
     private List<User> mUserDataList = new ArrayList<>();
 
@@ -51,25 +46,14 @@ public class UserActivity extends BaseActivity implements UserView {
         userListRecyclerView.setAdapter(mAdapter);
     }
 
-    private void setUpProgressDialog() {
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setMessage("Loading . . .");
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setProgress(0);
-        mProgressDialog.setMax(100);
-    }
-
     @Override
     public void displayLoadingScreen() {
-        if(mProgressDialog!=null)
-            startProgressDialog();
+        startProgressDialog(getString(R.string.loading));
     }
 
     @Override
     public void hideLoadingScreen() {
-        if(mProgressDialog != null )
-            mProgressDialog.dismiss();
+        stopProgressDialog();
     }
 
     @Override
@@ -82,26 +66,6 @@ public class UserActivity extends BaseActivity implements UserView {
     @Override
     public void fetchDataError() {
 
-    }
-
-    public void startProgressDialog() {
-        mProgressDialog.show();
-        progressBarStatus = 0;
-        counter = 0;
-        new Thread(() -> {
-            while (progressBarStatus < 100) {
-                progressBarStatus = counter;
-                counter += 2;
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                progressBarHandler.post(() -> mProgressDialog.setProgress(progressBarStatus));
-            }
-            if (progressBarStatus >= 100)
-                return;
-        }).start();
     }
 
 }

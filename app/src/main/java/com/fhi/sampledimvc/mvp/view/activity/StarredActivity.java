@@ -1,10 +1,8 @@
 package com.fhi.sampledimvc.mvp.view.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -22,11 +20,6 @@ import butterknife.ButterKnife;
 public class StarredActivity extends BaseActivity implements StarredView {
     @BindView(R.id.starredList)
     RecyclerView starredListRecyclerView;
-
-    ProgressDialog mProgressDialog;
-    private int progressBarStatus = 0;
-    private Handler progressBarHandler = new Handler();
-    private int counter = 0;
 
     StarredDataAdapter mAdapter;
     private List<GitHubRepoStarred> mStarredDataList = new ArrayList<>();
@@ -51,25 +44,14 @@ public class StarredActivity extends BaseActivity implements StarredView {
 
     }
 
-    private void setUpProgressDialog() {
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setMessage("Loading . . .");
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setProgress(0);
-        mProgressDialog.setMax(100);
-    }
-
     @Override
     public void displayLoadingScreen() {
-        if(mProgressDialog!=null)
-            startProgressDialog();
+        startProgressDialog(getString(R.string.loading));
     }
 
     @Override
     public void hideLoadingScreen() {
-        if (mProgressDialog != null)
-            mProgressDialog.dismiss();
+        stopProgressDialog();
     }
 
     @Override
@@ -84,24 +66,5 @@ public class StarredActivity extends BaseActivity implements StarredView {
     public void fetchDataError() {
     }
 
-    public void startProgressDialog() {
-        mProgressDialog.show();
-        progressBarStatus = 0;
-        counter = 0;
-        new Thread(() -> {
-            while (progressBarStatus < 100) {
-                progressBarStatus = counter;
-                counter += 2;
-                try {
-                    Thread.sleep(50);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                progressBarHandler.post(() -> mProgressDialog.setProgress(progressBarStatus));
-            }
-            if (progressBarStatus >= 100)
-                return;
-        }).start();
-    }
 
 }

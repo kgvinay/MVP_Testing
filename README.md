@@ -1,10 +1,12 @@
 # MVP_Testing
 A Simple Example describing the usage of MVP.
-Additional: 
-    -Clean Architecture
-    -Use Cases
-    -Localization
-    -(SwipeRefreshLayout, ProgressBar)
+
+Including: 
+
+ - Clean Architecture
+ - Use Cases
+ - Localization
+ - (SwipeRefreshLayout, ProgressBar,...)
     
 Project : Fetch different information(Starred Repositories, Users, User Repositories) from Github and present them via Recycler View
 

@@ -1,6 +1,9 @@
 package com.fhi.sampledimvc.mvp.view.activity;
 
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.fhi.sampledimvc.SampleTestApplication;
@@ -14,9 +17,13 @@ import com.fhi.sampledimvc.mvp.presenter.UserPresenter;
 import com.fhi.sampledimvc.mvp.view.Util.DividerItemDecoration;
 import com.fhi.sampledimvc.navigation.Navigator;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 public class BaseActivity extends AppCompatActivity {
+
+    Locale locale;
 
     @Inject
     Navigator navigator;
@@ -36,7 +43,16 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Configuration config = getBaseContext().getResources().getConfiguration();
 
+        String lang = preferences.getString("LANG","");
+        if (!lang.equals("") && !config.locale.equals(lang)) {
+            locale = new Locale(lang);
+            Locale.setDefault(locale);
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        }
         DaggerUseCaseComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())

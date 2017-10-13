@@ -11,9 +11,9 @@
     <string name="main_buttonProgressbar">Progressbar test</string>
     <string name="main_EditTextGithubUsername">Github username:</string>
     <string name="repos_defaultTitleText">Found 0 repositories</string>
-    <string name="item_repo_RepoName">Name</string>
-    <string name="item_repo_ProgrammingLanguage">Programming Language</string>
-    <string name="item_repo_CreationDate">Creation Date</string>
+    <string name="item_repo_RepoName">Name %1$s</string>
+    <string name="item_repo_ProgrammingLanguage">Programming Language: %1$s</string>
+    <string name="item_repo_CreationDate">Creation Date: %1$s at %2$s</string>
     <string name="item_user_RepoURL">Repository URL</string>
     <string name="action_settings">Settings</string>
     <string name="action_devinfo">About</string>
@@ -21,6 +21,9 @@
     <string name="language_setting">Change Language</string>
     <string name="lang_dialog_title">Language Settings</string>
     <string name="lang_dialog_message">Choose Language:</string>
+    <string name="loading">Loading . . .</string>
+    <string name="repo_titleAfterFound">Found %1$d / %2$d repositories of user \'%3$s\' (Page %4$d of %5$d)</string>
+    <string name="reload">Reloading . . .</string>
     <string-array name="lang_select">
         <item>English</item>
         <item>German</item>

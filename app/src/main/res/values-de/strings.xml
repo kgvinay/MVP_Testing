@@ -3,9 +3,9 @@
     <string name="app_name">SampleDIMVC</string>
     <string name="action_devinfo">Über</string>
     <string name="action_settings">Einstellungen</string>
-    <string name="item_repo_CreationDate">Erstellungsdatum</string>
-    <string name="item_repo_ProgrammingLanguage">Programmiersprache</string>
-    <string name="item_repo_RepoName">Name</string>
+    <string name="item_repo_CreationDate">Erstellungsdatum: %1$s um %2$s</string>
+    <string name="item_repo_ProgrammingLanguage">Programmiersprache: %1$s</string>
+    <string name="item_repo_RepoName">"Name: %1$s"</string>
     <string name="item_user_RepoURL">Repository URL</string>
     <string name="lang_dialog_message">Sprache auswählen:</string>
     <string name="lang_dialog_title">Spracheinstellungen</string>
@@ -22,4 +22,7 @@
     <string name="settings_language_German">Deutsch</string>
     <string name="settings_language_Hindi">Hindi</string>
     <string name="share_app">Teilen</string>
+    <string name="loading">Lädt...</string>
+    <string name="repo_titleAfterFound">%1$d / %2$d Repositorys des Nutzers \'%3$s\' gefunden (Seite %4$d von %5$d)</string>
+    <string name="reload">Neu laden . . .</string>
 </resources>

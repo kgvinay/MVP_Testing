@@ -65,7 +65,7 @@ public class ReposActivity extends BaseActivity implements ReposView {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         reposListRecyclerView.setLayoutManager(mLayoutManager);
         reposListRecyclerView.addItemDecoration(dividerItemDecoration);
-        mAdapter = new RepoDataAdapter(mRepoList);
+        mAdapter = new RepoDataAdapter(mRepoList,this);
         reposListRecyclerView.setAdapter(mAdapter);
     }
 
@@ -108,7 +108,7 @@ public class ReposActivity extends BaseActivity implements ReposView {
     }
 
     private void refresh() {
-        startProgressDialog("Reloading...");
+        startProgressDialog(getString(R.string.reload));
         mRepoPresenter.refresh();
         if(mRepoSwipeRefreshLayout.isRefreshing())
             mRepoSwipeRefreshLayout.setRefreshing(false);
@@ -117,7 +117,7 @@ public class ReposActivity extends BaseActivity implements ReposView {
     private void setUpProgressDialog() {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
-        mProgressDialog.setMessage("Loading . . .");
+        mProgressDialog.setMessage(getString(R.string.loading));
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setProgress(0);
         mProgressDialog.setMax(100);
@@ -131,9 +131,9 @@ public class ReposActivity extends BaseActivity implements ReposView {
         new Thread(() -> {
             while (progressBarStatus < 100) {
                 progressBarStatus = counter;
-                counter += 2;
+                counter += 1;
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -147,7 +147,7 @@ public class ReposActivity extends BaseActivity implements ReposView {
     @Override
     public void displayLoadingScreen() {
         if(mProgressDialog!=null)
-            startProgressDialog("Loading . . .");
+            startProgressDialog(getString(R.string.loading));
     }
 
     @Override
@@ -158,13 +158,13 @@ public class ReposActivity extends BaseActivity implements ReposView {
 
     @Override
     public void showTitleByUsername(List<GitHubUserRepos> reposList,String username,int currentPage,int totalPages) {
-        mReposTitleTextView.setText(String.format("Found %s / %s repositories of user '%s' (Page %s of %s)",mAdapter.getItemCount(), reposList.size(), username,currentPage,totalPages));
+        mReposTitleTextView.setText(getString(R.string.repo_titleAfterFound, mAdapter.getItemCount(), reposList.size(), username, currentPage, totalPages));
     }
 
     @Override
     public void updateReposResult(List<GitHubUserRepos> reposList) {
         mRepoList = reposList;
-        mAdapter = new RepoDataAdapter(mRepoList);
+        mAdapter = new RepoDataAdapter(mRepoList,this);
         reposListRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
     }

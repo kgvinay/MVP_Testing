@@ -11,7 +11,7 @@
             android:id="@+id/repoTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/item_repo_RepoName"
             android:textSize="18sp"
             android:textColor="#000000"
             android:textStyle="bold" />
@@ -20,12 +20,13 @@
             android:id="@+id/repoLanguageTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Programming Language" />
+            android:text="@string/item_repo_ProgrammingLanguage"
+            />
 
         <TextView
             android:id="@+id/repoCreationDateTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Creation Date" />
+            android:text="@string/item_repo_CreationDate" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

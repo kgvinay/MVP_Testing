@@ -1,12 +1,9 @@
 package com.fhi.sampledimvc.mvp.view.activity;
 
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,8 +15,6 @@ import com.fhi.sampledimvc.R;
 
 import java.util.Locale;
 
-import butterknife.BindDrawable;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -29,13 +24,6 @@ import butterknife.OnClick;
  */
 
 public class MainActivity extends BaseActivity {
-
-
-    @BindView(R.id.starredButton)
-    AppCompatButton mStarredButton;
-
-    @BindView(R.id.userButton)
-    AppCompatButton mUserButton;
 
     Locale locale;
 
@@ -82,16 +70,16 @@ public class MainActivity extends BaseActivity {
             int langpos = mLanguageSpinner.getSelectedItemPosition();
             switch(langpos) {
                 case 0: //English
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "en").commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "en").apply();
                     setLangRecreate("en");
                     return;
                 case 1: //German
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "de").commit();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "de").apply();
                     setLangRecreate("de");
                     return;
                 default: //By default set to english
-                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "en").commit();
-                    setLangRecreate("en");
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("LANG", "de").apply();
+                    setLangRecreate("de");
                     return;
             }
         });

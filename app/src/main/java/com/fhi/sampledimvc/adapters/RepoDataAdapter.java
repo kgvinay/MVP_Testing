@@ -1,5 +1,7 @@
 package com.fhi.sampledimvc.adapters;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,9 +24,11 @@ import butterknife.ButterKnife;
 
 public class RepoDataAdapter extends RecyclerView.Adapter<RepoDataAdapter.RepoDataHolder> {
     private List<GitHubUserRepos> mRepoList;
+    private Context context;
 
-    public RepoDataAdapter(List<GitHubUserRepos> reposList) {
+    public RepoDataAdapter(List<GitHubUserRepos> reposList,Context context) {
         mRepoList = reposList;
+        this.context = context;
     }
 
     @Override
@@ -38,8 +42,8 @@ public class RepoDataAdapter extends RecyclerView.Adapter<RepoDataAdapter.RepoDa
     public void onBindViewHolder(RepoDataHolder holder, int position) {
         Log.d("logs", "getItemCount: " + mRepoList.size());
         holder.mRepoTitleView.setText(mRepoList.get(position).getName());
-        holder.mRepoLanguageTextView.setText(String.format("Language: %s", String.valueOf(mRepoList.get(position).getLanguage() == null ? "N/A" : mRepoList.get(position).getLanguage())));
-        holder.mRepoCreationDateTextView.setText(String.format("Created on: %s at %s", mRepoList.get(position).getCreatedAt().split("T")[0], mRepoList.get(position).getCreatedAt().split("T")[1].substring(0, mRepoList.get(position).getCreatedAt().split("T")[1].length() - 1)));
+        holder.mRepoLanguageTextView.setText(context.getResources().getString(R.string.item_repo_ProgrammingLanguage, String.valueOf(mRepoList.get(position).getLanguage() == null ? "N/A" : mRepoList.get(position).getLanguage())));
+        holder.mRepoCreationDateTextView.setText(context.getResources().getString(R.string.item_repo_CreationDate, mRepoList.get(position).getCreatedAt().split("T")[0], mRepoList.get(position).getCreatedAt().split("T")[1].substring(0, mRepoList.get(position).getCreatedAt().split("T")[1].length() - 1)));
     }
 
     @Override

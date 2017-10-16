@@ -29,7 +29,7 @@ public class StarredPresenter implements Presenter {
 
     public void initialize() {
         mView.displayLoadingScreen();
-        mStarredListCase.setRepositoryName("JakeWharton");
+        mStarredListCase.setUsername("pl4gue");
         mStarredListCase.execute()
                 .subscribe(this::onStarredResultReceived, this::onStarredResultsError);
     }

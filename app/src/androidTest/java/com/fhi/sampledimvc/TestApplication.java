@@ -3,9 +3,6 @@ package com.fhi.sampledimvc;
 import com.fhi.sampledimvc.di.DaggerTestAppComponent;
 import com.fhi.sampledimvc.di.TestAppComponent;
 import com.fhi.sampledimvc.di.TestAppModule;
-import com.fhi.sampledimvc.injector.di.components.ApplicationComponent;
-import com.fhi.sampledimvc.injector.di.components.DaggerApplicationComponent;
-import com.fhi.sampledimvc.injector.di.modules.ApplicationModule;
 
 /**
  * Created by Vinay on 12/9/2016.
@@ -13,7 +10,6 @@ import com.fhi.sampledimvc.injector.di.modules.ApplicationModule;
 public class TestApplication extends SampleTestApplication {
 
     private TestAppComponent testAppComponent;
-
 
     @Override
     public void onCreate() {

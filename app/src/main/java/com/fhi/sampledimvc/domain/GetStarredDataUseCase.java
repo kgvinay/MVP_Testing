@@ -1,9 +1,7 @@
 package com.fhi.sampledimvc.domain;
 
-import android.util.Log;
-
 import com.fhi.sampledimvc.data.entity.starred.GitHubRepoStarred;
-import com.fhi.sampledimvc.data.repository.SampleRepository;
+import com.fhi.sampledimvc.data.repository.Github;
 
 import java.util.List;
 
@@ -18,14 +16,14 @@ import rx.Scheduler;
  */
 public class GetStarredDataUseCase extends Usecase<List<GitHubRepoStarred>> {
 
-    private final SampleRepository mRepository;
+    private final Github mRepository;
     private final Scheduler mUiThread;
     private final Scheduler mExecutorThread;
-    private String mRepoName;
+    private String mUsername;
 
     @Inject
     public GetStarredDataUseCase(
-            SampleRepository repository,
+            Github repository,
             @Named("ui_thread") Scheduler uiThread,
             @Named("executor_thread") Scheduler executorThread) {
 
@@ -34,13 +32,13 @@ public class GetStarredDataUseCase extends Usecase<List<GitHubRepoStarred>> {
         mExecutorThread = executorThread;
     }
 
-    public void setRepositoryName(String repositoryName){
-        mRepoName = repositoryName;
+    public void setUsername(String username){
+        mUsername = username;
     }
 
     @Override
     public Observable<List<GitHubRepoStarred>> buildObservable() {
-        return mRepository.getStarredRepositories(mRepoName)
+        return mRepository.getStarredRepositories(mUsername)
                 .observeOn(mUiThread)
                 .subscribeOn(mExecutorThread);
     }

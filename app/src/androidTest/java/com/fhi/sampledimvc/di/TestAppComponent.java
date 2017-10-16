@@ -16,10 +16,10 @@
 
 package com.fhi.sampledimvc.di;
 
-import com.fhi.sampledimvc.SampleTestApplication;
 import com.fhi.sampledimvc.TestApplication;
-import com.fhi.sampledimvc.data.repository.SampleRepository;
+import com.fhi.sampledimvc.data.repository.Github;
 import com.fhi.sampledimvc.injector.di.components.ApplicationComponent;
+import com.fhi.sampledimvc.mvp.view.Util.DividerItemDecoration;
 import com.fhi.sampledimvc.tests.MainActivityTests;
 
 import javax.inject.Named;
@@ -34,9 +34,11 @@ public interface TestAppComponent extends ApplicationComponent {
 
     void inject(MainActivityTests test);
 
-    SampleRepository sampleRepository();
+    Github sampleRepository();
 
     TestApplication application();
+
+    DividerItemDecoration dividerItem();
 
     @Named("ui_thread")
     Scheduler uiThread();

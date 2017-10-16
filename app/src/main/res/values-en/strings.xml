@@ -11,7 +11,7 @@
     <string name="main_buttonProgressbar">Progressbar test</string>
     <string name="main_EditTextGithubUsername">Github username:</string>
     <string name="repos_defaultTitleText">Found 0 repositories</string>
-    <string name="item_repo_RepoName">Name: %1$s</string>
+    <string name="item_repo_RepoName">Name %1$s</string>
     <string name="item_repo_ProgrammingLanguage">Programming Language: %1$s</string>
     <string name="item_repo_CreationDate">Creation Date: %1$s at %2$s</string>
     <string name="item_user_RepoURL">Repository URL</string>

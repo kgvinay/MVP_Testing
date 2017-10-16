@@ -1,13 +1,10 @@
 package com.fhi.sampledimvc.mvp.view.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.fhi.sampledimvc.R;
 import com.fhi.sampledimvc.adapters.StarredDataAdapter;
@@ -24,11 +21,8 @@ public class StarredActivity extends BaseActivity implements StarredView {
     @BindView(R.id.starredList)
     RecyclerView starredListRecyclerView;
 
-    ProgressDialog mProgressDialog;
-
     StarredDataAdapter mAdapter;
     private List<GitHubRepoStarred> mStarredDataList = new ArrayList<>();
-
 
     public static Intent getCallingIntent(Context context) {
         return new Intent(context, StarredActivity.class);
@@ -39,33 +33,25 @@ public class StarredActivity extends BaseActivity implements StarredView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starred);
         ButterKnife.bind(this);
-        setupProgressDialog();
+        setUpProgressDialog();
         mStarredPresenter.attachView(this);
         mStarredPresenter.initialize();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         starredListRecyclerView.setLayoutManager(mLayoutManager);
+        starredListRecyclerView.addItemDecoration(dividerItemDecoration);
         mAdapter = new StarredDataAdapter(mStarredDataList);
         starredListRecyclerView.setAdapter(mAdapter);
 
     }
 
-    private void setupProgressDialog() {
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setMessage("Loading . . . ");
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setCancelable(false);
-    }
-
     @Override
     public void displayLoadingScreen() {
-        if (mProgressDialog != null)
-            mProgressDialog.show();
+        startProgressDialog(getString(R.string.loading));
     }
 
     @Override
     public void hideLoadingScreen() {
-        if (mProgressDialog != null)
-            mProgressDialog.dismiss();
+        stopProgressDialog();
     }
 
     @Override
@@ -78,6 +64,7 @@ public class StarredActivity extends BaseActivity implements StarredView {
 
     @Override
     public void fetchDataError() {
-
     }
+
+
 }

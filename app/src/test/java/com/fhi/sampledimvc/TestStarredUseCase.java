@@ -1,7 +1,7 @@
 package com.fhi.sampledimvc;
 
 import com.fhi.sampledimvc.data.entity.starred.GitHubRepoStarred;
-import com.fhi.sampledimvc.data.repository.SampleRepository;
+import com.fhi.sampledimvc.data.repository.Github;
 import com.fhi.sampledimvc.domain.GetStarredDataUseCase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,7 +27,7 @@ public class TestStarredUseCase {
     private static final String STARRED_USER_NAME = "JakeWharton";
 
     @Mock
-    private SampleRepository mRepository;
+    private Github mRepository;
 
     @Mock
     Scheduler mockScheduler;
@@ -43,7 +43,7 @@ public class TestStarredUseCase {
         GetStarredDataUseCase starredDataUseCase = givenACharacterUsecase();
 
         Mockito.when(mRepository.getStarredRepositories(STARRED_USER_NAME)).thenReturn(getStarredRepositories());
-        starredDataUseCase.setRepositoryName(STARRED_USER_NAME);
+        starredDataUseCase.setUsername(STARRED_USER_NAME);
         starredDataUseCase.execute();
 
         Mockito.verify(mRepository, Mockito.only()).getStarredRepositories(STARRED_USER_NAME);

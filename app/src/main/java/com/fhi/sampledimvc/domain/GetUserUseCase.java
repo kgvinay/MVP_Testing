@@ -1,7 +1,7 @@
 package com.fhi.sampledimvc.domain;
 
 import com.fhi.sampledimvc.data.entity.users.User;
-import com.fhi.sampledimvc.data.repository.SampleRepository;
+import com.fhi.sampledimvc.data.repository.Github;
 
 import java.util.List;
 
@@ -17,14 +17,14 @@ import rx.Scheduler;
 
 public class GetUserUseCase extends Usecase<List<User>> {
 
-    private final SampleRepository mRepository;
+    private final Github mRepository;
     private final Scheduler mUiThread;
     private final Scheduler mExecutorThread;
     private String mRepoName;
 
     @Inject
     public GetUserUseCase(
-            SampleRepository repository,
+            Github repository,
             @Named("ui_thread") Scheduler uiThread,
             @Named("executor_thread") Scheduler executorThread) {
 

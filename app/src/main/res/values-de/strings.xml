@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SampleDIMVC</string>
+    <string name="action_devinfo">Über</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="item_repo_CreationDate">Erstellungsdatum: %1$s um %2$s</string>
+    <string name="item_repo_ProgrammingLanguage">Programmiersprache: %1$s</string>
+    <string name="item_repo_RepoName">"Name: %1$s"</string>
+    <string name="item_user_RepoURL">Repository URL</string>
+    <string name="lang_dialog_message">Sprache auswählen:</string>
+    <string name="lang_dialog_title">Spracheinstellungen</string>
+    <string name="language_setting">Sprache ändern:</string>
+    <string name="main_EditTextGithubUsername">Github Benutzername</string>
+    <string name="main_buttonGithubUsers">Github Nutzer</string>
+    <string name="main_buttonProgressbar">Progressbar test</string>
+    <string name="main_buttonRepositories">Repositorys</string>
+    <string name="main_buttonStarred">Markiert</string>
+    <string name="main_menu_Settings">Einstellungen</string>
+    <string name="repos_defaultTitleText">0 Repositorys gefunden</string>
+    <string name="settings_language_English">Englisch</string>
+    <string name="settings_language_French">Französisch</string>
+    <string name="settings_language_German">Deutsch</string>
+    <string name="settings_language_Hindi">Hindi</string>
+    <string name="share_app">Teilen</string>
+    <string name="loading">Lädt...</string>
+    <string name="repo_titleAfterFound">%1$d / %2$d Repositorys des Nutzers \'%3$s\' gefunden (Seite %4$d von %5$d)</string>
+    <string name="reload">Neu laden . . .</string>
+    <string name="languagePreferenceKey">LANG</string>
+    <string-array name="lang_select">
+        <item>Englisch</item>
+        <item>Deutsch</item>
+    </string-array>
+</resources>

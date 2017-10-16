@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="5dp">
+    android:layout_width="match_parent" android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,19 +8,25 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/loginTextView"
+            android:id="@+id/repoTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/item_repo_RepoName"
             android:textSize="18sp"
             android:textColor="#000000"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/reposUrlTextView"
+            android:id="@+id/repoLanguageTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Repository URL" />
+            android:text="@string/item_repo_ProgrammingLanguage"
+            />
 
+        <TextView
+            android:id="@+id/repoCreationDateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/item_repo_CreationDate" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

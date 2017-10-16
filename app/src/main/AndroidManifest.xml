@@ -14,17 +14,24 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".mvp.view.activity.MainActivity">
+        android:theme="@style/AppTheme"
+        android:configChanges="layoutDirection|locale">
+        <activity android:name=".mvp.view.activity.MainActivity"
+            android:configChanges="layoutDirection|locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.view.activity.BaseActivity" />
-        <activity android:name=".mvp.view.activity.StarredActivity" />
-        <activity android:name=".mvp.view.activity.UserActivity"/>
+        <activity android:name=".mvp.view.activity.BaseActivity"
+            android:configChanges="layoutDirection|locale"/>
+        <activity android:name=".mvp.view.activity.StarredActivity"
+            android:configChanges="layoutDirection|locale"/>
+        <activity android:name=".mvp.view.activity.UserActivity"
+            android:configChanges="layoutDirection|locale"/>
+        <activity android:name=".mvp.view.activity.ReposActivity"
+            android:configChanges="layoutDirection|locale"/>
     </application>
 
 </manifest>
